@@ -16,9 +16,6 @@ const dbConfig = {
     multipleStatements: true
 };
 
-// Leer el archivo createDbConfig
-const createDbConfig = fs.readFileSync(path.join(__dirname, '..', 'scripts', 'create_database.sql'), 'utf8');
-
 // Crear la conexión
 const connection = mysql.createConnection(dbConfig);
 
@@ -29,16 +26,6 @@ connection.connect((err) => {
     }
 
     console.log('Conectado a la base de datos.');
-
-    // Ejecutar el script createDbConfig
-    connection.query(createDbConfig, (err, results) => {
-        if (err) {
-            console.error('Error ejecutando el script SQL createDbConfig:', err.stack);
-        } 
-        console.log('Base de datos configurada y lista.');
-
-    });
 });
-
 
 module.exports = connection;
